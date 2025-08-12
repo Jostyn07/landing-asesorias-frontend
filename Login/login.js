@@ -1,6 +1,6 @@
 const clientId = '64713983477-nk4rmn95cgjsnab4gmp44dpjsdp1brk2.apps.googleusercontent.com';
 const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets";
-const redirect_URL = "https://landing-asesorias-frontend.onrender.com/Formulario/index.html";
+const redirect_URL = "https://landing-asesorias-frontend.onrender.com/../Formulario/index.html";
 
 let tokenClient;
 let accsessToken = null;

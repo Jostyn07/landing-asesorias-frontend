@@ -8,7 +8,7 @@ const DRIVE_FOLDER_ID = "1zxpiKTAgF6ZPDF3hi40f7CRWY8QXVqRE";
 const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets";
 
 // ========================= Auth Guard + fetch wrapper ======================
-const LOGIN_URL = "https://landing-asesorias-frontend.onrender.com/Login/login.html";
+const LOGIN_URL = "https://landing-asesorias-frontend.onrender.com/../Login/login.html";
 const AUTH_SKEW_MS = 30_000;
 
 function getAuthState() {
