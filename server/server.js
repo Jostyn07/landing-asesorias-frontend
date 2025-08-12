@@ -28,7 +28,10 @@ try {
 const app = express();
 const upload = multer();
 
-const allowedOrigins = ["https://asesoriasth.com"];
+const allowedOrigins = [
+  "https://asesoriasth.com",
+  "https://landing-asesorias-frontend.onrender.com"
+];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
