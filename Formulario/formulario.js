@@ -713,7 +713,7 @@ async function appendToSheet(sheetName, rows) {
 }
 
 // ================================= Submit ================================
-const BACKEND = "http://localhost:3000"; // o tu dominio en Render
+const BACKEND = "https://asesoriasth-backend.onrender.com"; // o tu dominio en Render
 
 async function onSubmit(e) {
   e.preventDefault();
