@@ -101,7 +101,11 @@ app.post('/api/upload-to-drive', upload.array('files'), async (req, res) => {
         res.status(500).json({ error: 'Error al subir archivos a Google Drive' });
     }
 });
-
+app.post('/api/polizas', (req, res) => {
+    // Aquí puedes guardar los datos, enviarlos a Google Sheets, etc.
+    // Por ahora solo responde con éxito para que el frontend no falle.
+    res.json({ ok: true, message: "Poliza recibida correctamente" });
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
