@@ -2,10 +2,10 @@
   "name": "landing-backend",
   "private": true,
   "type": "module",
-  "main": "server/server.cjs",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.cjs",
-    "dev": "nodemon server/server.cjs"
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
