@@ -716,6 +716,7 @@ async function appendToSheet(sheetName, rows) {
 const BACKEND = "https://asesoriasth-backend.onrender.com"; // o tu dominio en Render
 
 async function onSubmit(e) {
+  showStatus("Enviando datos...", "info");
   e.preventDefault();
 
   // 1) Preparar data
@@ -766,8 +767,11 @@ async function onSubmit(e) {
     if (!upRes.ok) throw new Error(upRes.error || 'Upload');
     // guardar link si lo quieres en tu sheet principal, etc.
   }
-
-  showStatus("✅ Todo enviado al backend", "success");
+  if (true) {
+    showStatus("✅ Todo enviado al backend", "success");
+  } else {
+    showStatus("Error al enviar el formulario. Intenta nuevamente.");
+  }
 }
 
 
