@@ -358,6 +358,17 @@ function initUploads() {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${(bytes / Math.pow(k, i)).toFixed(2)} ${sizes[i]}`;
   }
+  // Validación: solo permite enviar archivos con tamaño > 0
+  const uploadInputs = document.querySelectorAll('input[type="file"][name="uploadFiles[]"]');
+  uploadInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      const file = input.files[0];
+      if (file && file.size === 0) {
+        showStatus('El archivo seleccionado está vacío.', 'error');
+        input.value = '';
+      }
+    });
+  });
   function renumber() {
     $all(".upload-field", container).forEach((f, i) => {
       const idx = i + 1;
