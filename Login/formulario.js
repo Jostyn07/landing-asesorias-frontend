@@ -845,7 +845,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Submit form
-  $("#dataForm")?.addEventListener("submit", onSubmit);
+  const form = document.getElementById("dataForm");
+  if (form) {
+    form.addEventListener("submit", onSubmit);
+  } else {
+    console.error("No se encontró el formulario con id 'dataForm'. Verifica el HTML.");
+  }
 });
 
 // Compatibilidad por si quedaran handlers inline antiguos:
