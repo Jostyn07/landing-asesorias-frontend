@@ -82,18 +82,29 @@ app.post("/api/upload-to-drive", upload.any(), async (req, res) => {
 
     const uploaded = [];
     for (const f of files) {
-      const safeName = [clientName, clientLastName, Date.now(), f.originalname].filter(Boolean).join("-");
-      const createResp = await drive.files.create({
-        requestBody: {
-          name: safeName,
-          parents: [DRIVE_FOLDER_ID],
-        },
-        media: {
-          mimeType: f.mimetype,
-          body: Buffer.from(f.buffer),
-        },
-        fields: "id,name",
-      });
+        // Log para depuración
+        console.log("Archivo recibido:", {
+          originalname: f.originalname,
+          mimetype: f.mimetype,
+          size: f.size,
+          bufferType: typeof f.buffer,
+          bufferLength: f.buffer?.length,
+        });
+        if (!f.buffer || !f.buffer.length) {
+          throw new Error("El archivo está vacío o no tiene buffer");
+        }
+        const safeName = [clientName, clientLastName, Date.now(), f.originalname].filter(Boolean).join("-");
+        const createResp = await drive.files.create({
+          requestBody: {
+            name: safeName,
+            parents: [DRIVE_FOLDER_ID],
+          },
+          media: {
+            mimeType: f.mimetype,
+            body: f.buffer,
+          },
+          fields: "id,name",
+        });
 
       const fileId = createResp.data.id;
 
