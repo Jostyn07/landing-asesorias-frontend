@@ -752,25 +752,27 @@ async function onSubmit(e) {
   }
 
   // 5) Subidas a DRIVE (opcional)
-  const blocks = document.querySelectorAll("#customUploadContainer .upload-field");
-  for (const b of blocks) {
-    const file = b.querySelector(".upload-input")?.files?.[0];
-    const name = b.querySelector(".archivo-nombre")?.value?.trim();
-    if (!file) continue;
+const blocks = document.querySelectorAll("#customUploadContainer .upload-field");
+for (const b of blocks) {
+  const file = b.querySelector(".upload-input")?.files?.[0];
+  const name = b.querySelector(".archivo-nombre")?.value?.trim();
+  if (!file) continue;
 
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("driveFileName", name || file.name);
+  const fd = new FormData();
+  fd.append("file", file);                      // <-- nombre del campo que espera el backend
+  fd.append("driveFileName", name || file.name);
 
-    const upRes = await fetch(`${BACKEND}/api/upload-to-drive`, { method: "POST", body: fd })
-      .then(r => r.json());
-    if (!upRes.ok) throw new Error(upRes.error || 'Upload');
-    // guardar link si lo quieres en tu sheet principal, etc.
-  }
-  if (true) {
-    showStatus("✅ Todo enviado al backend", "success");
+  const resp = await fetch(`${BACKEND}/api/upload-to-drive`, { method: "POST", body: fd });
+  const ct = resp.headers.get("content-type") || "";
+  let payload;
+  if (ct.includes("application/json")) {
+    payload = await resp.json();
   } else {
-    showStatus("Error al enviar el formulario. Intenta nuevamente.");
+    const text = await resp.text();
+    throw new Error(`Upload 500: ${text.slice(0, 300)}`);
+  }
+  if (!resp.ok || !payload?.ok) {
+    throw new Error(payload?.error || `Upload error (status ${resp.status})`);
   }
 }
 
