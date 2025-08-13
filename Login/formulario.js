@@ -761,7 +761,7 @@ async function onSubmit(e) {
     fd.append("file", file);
     fd.append("driveFileName", name || file.name);
 
-    const upRes = await fetch(`${BACKEND}/api/upload`, { method: "POST", body: fd })
+    const upRes = await fetch(`${BACKEND}/api/upload-to-drive`, { method: "POST", body: fd })
       .then(r => r.json());
     if (!upRes.ok) throw new Error(upRes.error || 'Upload');
     // guardar link si lo quieres en tu sheet principal, etc.
